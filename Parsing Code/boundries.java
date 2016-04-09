@@ -20,12 +20,12 @@ import org.apache.commons.csv.*;
 public class boundries {
 	
 	public static void main	(String [] args){
-		String fileName = "yelp_academic_dataset_review.csv";
+		String inputFile = "yelp_academic_dataset_review.csv";
 		StringBuilder data;
 		String outputFile = "test3.csv";
 		boolean flag = false;
 		String y = "\\!";
-		File file = new File(fileName);
+		File file = new File(inputFile);
 		File file2 = new File(outputFile);
 		String pattern = "[,;:\\$\"\\(\\)\\#\\.\\?\\!]";
 		String pattern2 = "[a-zA-Z]";
