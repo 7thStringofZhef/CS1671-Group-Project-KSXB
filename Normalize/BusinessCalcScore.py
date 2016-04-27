@@ -12,7 +12,7 @@ def get_bus_ratings():
                 first = False
             else:
                 # also grabs business review count in case needed later
-                business.update({row[0]: [row[4], row[5]]})
+                business.update({row[0]: [row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8]]})
 
     return business
 
@@ -56,7 +56,7 @@ def main():
     writer = csv.writer(wf)
 
     # header row
-    writer.writerow(["business_id", "stars", "review_count", "sentiment_stars"])
+    writer.writerow(["business_id", "full_address", "latitude", "longitude", "stars", "review_count", "categories", "attributes", "neighborhood", "sentiment_stars"])
 
     # get all business scores (gold standard)
     business_ratings = get_bus_ratings()
@@ -67,12 +67,20 @@ def main():
     #iterate over businesses
     businesses = business_scores.keys()
     for id in businesses:
+        bus_add = business_ratings[id][0]
+        bus_lat = business_ratings[id][1]
+        bus_lon = business_ratings[id][2]
+        bus_star = business_ratings[id][3]
+        bus_cat = business_ratings[id][5]
+        bus_att = business_ratings[id][6]
+        bus_neigh = business_ratings[id][7]
+
         rev_sum = business_scores[id][0]
         rev_cnt = business_scores[id][1]
         # calc average sentiment score
         sent_avg = float(rev_sum) / float(rev_cnt)
         sent_avg = round_to_5(sent_avg)
-        writer.writerow([id, business_ratings[id][0], rev_cnt, sent_avg])
+        writer.writerow([id, bus_add, bus_lat, bus_lon, bus_star, rev_cnt, bus_cat, bus_att, bus_neigh, sent_avg])
 
 if __name__ == '__main__':
     main()
