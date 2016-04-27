@@ -31,8 +31,8 @@ def main():
             else:
                 cnt += 1
                 # get star and sentiment scores
-                bus_star = float(row[1])
-                bus_sent = float(row[3])
+                bus_star = float(row[4])
+                bus_sent = float(row[9])
 
                 # strict
                 if bus_star == bus_sent:
